@@ -4,9 +4,7 @@ import { LoginPage } from '../src/pages/login.page.js';
 import { UnitsPage } from '../src/pages/units.page.js';
 
 test.describe('Unit permissions', () => {
-    test('admin can log in and access Units from navigation', async ({
-        page,
-    }) => {
+    test('admin can log in and access Units from navigation', async ({ page }) => {
         const loginPage = new LoginPage(page);
         const unitsPage = new UnitsPage(page);
 
@@ -44,9 +42,7 @@ test.describe('Unit permissions', () => {
 
         await unitsPage.openFirstIndividualUnit();
 
-        await expect(page).toHaveURL(
-            /\/units\/individual-units\/[^/]+\/overview/,
-        );
+        await expect(page).toHaveURL(/\/units\/individual-units\/[^/]+\/overview/);
 
         await expect(
             page.getByRole('tab', {
@@ -81,9 +77,7 @@ test.describe('Unit permissions', () => {
 
         await unitsPage.openFirstUnitGroup();
 
-        await expect(page).toHaveURL(
-            /\/units\/unit-groups\/size-and-types\/[^/]+/,
-        );
+        await expect(page).toHaveURL(/\/units\/unit-groups\/size-and-types\/[^/]+/);
 
         await expect(
             page.getByRole('tab', {
@@ -107,9 +101,7 @@ test.describe('Unit permissions', () => {
         ).toBeVisible();
     });
 
-    test('admin can access Individual Units directly by URL', async ({
-        page,
-    }) => {
+    test('admin can access Individual Units directly by URL', async ({ page }) => {
         const loginPage = new LoginPage(page);
         const unitsPage = new UnitsPage(page);
 
@@ -158,16 +150,12 @@ test.describe('Unit permissions', () => {
         await expect(unitsPage.addUnitGroupTitle).toBeVisible();
         await expect(unitsPage.unitWidthInput).toBeVisible();
         await expect(unitsPage.unitDepthInput).toBeVisible();
-        await expect(
-            unitsPage.unitGroupStreetRateInput,
-        ).toBeVisible();
+        await expect(unitsPage.unitGroupStreetRateInput).toBeVisible();
         await expect(unitsPage.saveButton).toBeVisible();
         await expect(unitsPage.cancelButton).toBeVisible();
     });
 
-    test('logged-out user cannot access a protected Units URL', async ({
-        page,
-    }) => {
+    test('logged-out user cannot access a protected Units URL', async ({ page }) => {
         const loginPage = new LoginPage(page);
         const unitsPage = new UnitsPage(page);
 

@@ -53,25 +53,17 @@ export class UnitsPage {
             'a[href^="/units/individual-units/"][href$="/overview"]',
         );
 
-        this.unitGroupLinks = page.locator(
-            'a[href^="/units/unit-groups/size-and-types/"]',
-        );
+        this.unitGroupLinks = page.locator('a[href^="/units/unit-groups/size-and-types/"]');
 
-        this.addUnitTitle = page
-            .getByText('Add Unit', { exact: true })
-            .last();
+        this.addUnitTitle = page.getByText('Add Unit', { exact: true }).last();
 
-        this.addUnitGroupTitle = page
-            .getByText('Add Unit Group', { exact: true })
-            .last();
+        this.addUnitGroupTitle = page.getByText('Add Unit Group', { exact: true }).last();
 
         this.unitNumberInput = page.getByTestId('unitNumber-input');
         this.unitWidthInput = page.getByTestId('unitWidth-input');
         this.unitDepthInput = page.getByTestId('unitDepth-input');
 
-        this.unitGroupStreetRateInput = page.getByTestId(
-            'tiers.0.currentStreetRate-input',
-        );
+        this.unitGroupStreetRateInput = page.getByTestId('tiers.0.currentStreetRate-input');
 
         this.saveButton = page.getByRole('button', {
             name: 'Save',
@@ -94,10 +86,7 @@ export class UnitsPage {
     async openUnitGroups(): Promise<void> {
         await this.unitGroupsTab.click();
 
-        await expect(this.unitGroupsTab).toHaveAttribute(
-            'aria-selected',
-            'true',
-        );
+        await expect(this.unitGroupsTab).toHaveAttribute('aria-selected', 'true');
     }
 
     async openFirstIndividualUnit(): Promise<void> {
