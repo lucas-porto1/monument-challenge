@@ -2,6 +2,7 @@ import { expect, type Locator, type Page } from '@playwright/test';
 
 export class UnitsPage {
     readonly unitsNavigationLink: Locator;
+
     readonly individualUnitsTab: Locator;
     readonly unitGroupsTab: Locator;
 
@@ -55,12 +56,22 @@ export class UnitsPage {
 
         this.unitGroupLinks = page.locator('a[href^="/units/unit-groups/size-and-types/"]');
 
-        this.addUnitTitle = page.getByText('Add Unit', { exact: true }).last();
+        this.addUnitTitle = page
+            .getByText('Add Unit', {
+                exact: true,
+            })
+            .last();
 
-        this.addUnitGroupTitle = page.getByText('Add Unit Group', { exact: true }).last();
+        this.addUnitGroupTitle = page
+            .getByText('Add Unit Group', {
+                exact: true,
+            })
+            .last();
 
         this.unitNumberInput = page.getByTestId('unitNumber-input');
+
         this.unitWidthInput = page.getByTestId('unitWidth-input');
+
         this.unitDepthInput = page.getByTestId('unitDepth-input');
 
         this.unitGroupStreetRateInput = page.getByTestId('tiers.0.currentStreetRate-input');
@@ -80,6 +91,7 @@ export class UnitsPage {
 
     async openFromNavigation(): Promise<void> {
         await this.unitsNavigationLink.click();
+
         await expect(this.individualUnitsTab).toBeVisible();
     }
 
@@ -90,27 +102,35 @@ export class UnitsPage {
     }
 
     async openFirstIndividualUnit(): Promise<void> {
-        await expect(this.individualUnitLinks.first()).toBeVisible();
-        await this.individualUnitLinks.first().click();
+        const firstUnit = this.individualUnitLinks.first();
+
+        await expect(firstUnit).toBeVisible();
+        await firstUnit.click();
     }
 
     async openFirstUnitGroup(): Promise<void> {
-        await expect(this.unitGroupLinks.first()).toBeVisible();
-        await this.unitGroupLinks.first().click();
+        const firstUnitGroup = this.unitGroupLinks.first();
+
+        await expect(firstUnitGroup).toBeVisible();
+
+        await firstUnitGroup.click();
     }
 
     async openDirectly(): Promise<void> {
         await this.page.goto('/units/individual-units');
+
         await expect(this.individualUnitsTab).toBeVisible();
     }
 
     async openAddUnitModal(): Promise<void> {
         await this.addUnitButton.click();
+
         await expect(this.unitNumberInput).toBeVisible();
     }
 
     async openAddUnitGroupModal(): Promise<void> {
         await this.addUnitGroupButton.click();
+
         await expect(this.unitGroupStreetRateInput).toBeVisible();
     }
 }

@@ -9,9 +9,13 @@ export class LoginPage {
 
     constructor(private readonly page: Page) {
         this.emailInput = page.getByLabel('Email Address / Username');
+
         this.passwordInput = page.getByTestId('password-input');
+
         this.signInButton = page.getByTestId('sign-in-button');
+
         this.avatar = page.getByTestId('avatar');
+
         this.logoutMenuItem = page.getByTestId('logout-menu-item');
     }
 
@@ -32,7 +36,9 @@ export class LoginPage {
 
     async logout(): Promise<void> {
         await this.avatar.click();
+
         await expect(this.logoutMenuItem).toBeVisible();
+
         await this.logoutMenuItem.click();
 
         await this.expectLoggedOut();
@@ -40,6 +46,7 @@ export class LoginPage {
 
     async expectLoggedOut(): Promise<void> {
         await expect(this.page).toHaveURL(/\/auth\/login/);
+
         await expect(this.signInButton).toBeVisible();
     }
 }
