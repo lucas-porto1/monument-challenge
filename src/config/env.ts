@@ -11,7 +11,22 @@ function requireEnv(name: string): string {
 }
 
 export const env = {
-    baseUrl: process.env.BASE_URL ?? 'https://monument.stg.monument.io',
-    adminEmail: requireEnv('ADMIN_EMAIL'),
-    adminPassword: requireEnv('ADMIN_PASSWORD'),
+    baseUrl:
+        process.env.BASE_URL ??
+        'https://monument.stg.monument.io',
+
+    admin: {
+        email: requireEnv('ADMIN_EMAIL'),
+        password: requireEnv('ADMIN_PASSWORD'),
+    },
+
+    noView: {
+        email: requireEnv('NO_VIEW_EMAIL'),
+        password: requireEnv('NO_VIEW_PASSWORD'),
+    },
+
+    viewOnly: {
+        email: requireEnv('VIEW_ONLY_EMAIL'),
+        password: requireEnv('VIEW_ONLY_PASSWORD'),
+    },
 };

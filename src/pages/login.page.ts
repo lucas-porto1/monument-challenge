@@ -11,13 +11,13 @@ export class LoginPage {
         this.emailInput = page.getByLabel('Email Address / Username');
         this.passwordInput = page.getByTestId('password-input');
         this.signInButton = page.getByTestId('sign-in-button');
-
         this.avatar = page.getByTestId('avatar');
         this.logoutMenuItem = page.getByTestId('logout-menu-item');
     }
 
     async open(): Promise<void> {
         await this.page.goto('/auth/login');
+        await expect(this.signInButton).toBeVisible();
     }
 
     async login(email: string, password: string): Promise<void> {
@@ -25,18 +25,17 @@ export class LoginPage {
         await this.passwordInput.fill(password);
         await this.signInButton.click();
 
-        await expect(
-            this.page.getByRole('link', {
-                name: 'Units',
-                exact: true,
-            }),
-        ).toBeVisible();
+        await expect(this.avatar).toBeVisible({
+            timeout: 20_000,
+        });
     }
 
     async logout(): Promise<void> {
         await this.avatar.click();
         await expect(this.logoutMenuItem).toBeVisible();
         await this.logoutMenuItem.click();
+
+        await this.expectLoggedOut();
     }
 
     async expectLoggedOut(): Promise<void> {

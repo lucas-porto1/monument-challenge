@@ -9,7 +9,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
 
         await unitsPage.openFromNavigation();
 
@@ -23,7 +23,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
         await unitsPage.openFromNavigation();
 
         await unitsPage.openUnitGroups();
@@ -37,7 +37,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
         await unitsPage.openFromNavigation();
 
         await unitsPage.openFirstIndividualUnit();
@@ -71,7 +71,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
         await unitsPage.openFromNavigation();
         await unitsPage.openUnitGroups();
 
@@ -106,7 +106,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
 
         await unitsPage.openDirectly();
 
@@ -119,7 +119,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
         await unitsPage.openFromNavigation();
 
         await expect(unitsPage.addUnitButton).toBeVisible();
@@ -139,7 +139,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
         await unitsPage.openFromNavigation();
         await unitsPage.openUnitGroups();
 
@@ -160,7 +160,7 @@ test.describe('Unit permissions', () => {
         const unitsPage = new UnitsPage(page);
 
         await loginPage.open();
-        await loginPage.login(env.adminEmail, env.adminPassword);
+        await loginPage.login(env.admin.email, env.admin.password);
 
         await unitsPage.openDirectly();
 
