@@ -11,9 +11,7 @@ function requireEnv(name: string): string {
 }
 
 export const env = {
-    baseUrl:
-        process.env.BASE_URL ??
-        'https://monument.stg.monument.io',
+    baseUrl: process.env.BASE_URL ?? 'https://monument.stg.monument.io',
 
     admin: {
         email: requireEnv('ADMIN_EMAIL'),
