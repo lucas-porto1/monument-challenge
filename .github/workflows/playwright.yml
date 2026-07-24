@@ -11,7 +11,7 @@ on:
 
 jobs:
     test:
-        name: Run Playwright tests
+        name: Validate and run Playwright tests
         runs-on: ubuntu-latest
         timeout-minutes: 15
 
@@ -31,12 +31,49 @@ jobs:
             - name: Install Chromium
               run: npx playwright install --with-deps chromium
 
+            - name: Run type check
+              run: npm run typecheck
+              env:
+                  BASE_URL: ${{ secrets.BASE_URL }}
+                  ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+                  ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+                  NO_VIEW_EMAIL: ${{ secrets.NO_VIEW_EMAIL }}
+                  NO_VIEW_PASSWORD: ${{ secrets.NO_VIEW_PASSWORD }}
+                  VIEW_ONLY_EMAIL: ${{ secrets.VIEW_ONLY_EMAIL }}
+                  VIEW_ONLY_PASSWORD: ${{ secrets.VIEW_ONLY_PASSWORD }}
+
+            - name: Run lint
+              run: npm run lint
+              env:
+                  BASE_URL: ${{ secrets.BASE_URL }}
+                  ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+                  ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+                  NO_VIEW_EMAIL: ${{ secrets.NO_VIEW_EMAIL }}
+                  NO_VIEW_PASSWORD: ${{ secrets.NO_VIEW_PASSWORD }}
+                  VIEW_ONLY_EMAIL: ${{ secrets.VIEW_ONLY_EMAIL }}
+                  VIEW_ONLY_PASSWORD: ${{ secrets.VIEW_ONLY_PASSWORD }}
+
+            - name: Check formatting
+              run: npm run format:check
+              env:
+                  BASE_URL: ${{ secrets.BASE_URL }}
+                  ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+                  ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+                  NO_VIEW_EMAIL: ${{ secrets.NO_VIEW_EMAIL }}
+                  NO_VIEW_PASSWORD: ${{ secrets.NO_VIEW_PASSWORD }}
+                  VIEW_ONLY_EMAIL: ${{ secrets.VIEW_ONLY_EMAIL }}
+                  VIEW_ONLY_PASSWORD: ${{ secrets.VIEW_ONLY_PASSWORD }}
+
             - name: Run Playwright tests
               run: npm test
               env:
                   BASE_URL: ${{ secrets.BASE_URL }}
                   ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
                   ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+                  NO_VIEW_EMAIL: ${{ secrets.NO_VIEW_EMAIL }}
+                  NO_VIEW_PASSWORD: ${{ secrets.NO_VIEW_PASSWORD }}
+                  VIEW_ONLY_EMAIL: ${{ secrets.VIEW_ONLY_EMAIL }}
+                  VIEW_ONLY_PASSWORD: ${{ secrets.VIEW_ONLY_PASSWORD }}
 
             - name: Upload Playwright report
               if: always()
